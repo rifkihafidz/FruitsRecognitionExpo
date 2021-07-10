@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "FruitsRecognition",
+    "slug": "FruitsRecognition",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "FruitsRecognition"
+}
