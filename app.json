@@ -21,6 +21,11 @@
         "wasm",
         "svg"
       ]
+    },
+    "android": {
+      "permissions": [
+        "CAMERA"
+      ]
     }
   },
   "name": "FruitsRecognition"
