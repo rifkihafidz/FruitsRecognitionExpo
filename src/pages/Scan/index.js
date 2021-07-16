@@ -5,14 +5,15 @@ import { convertBase64ToTensor, getModel, startPrediction } from '../../helpers/
 import { cropPicture } from '../../helpers/image-helper';
 import { BackButton, Gap } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { IconCamera, IconFlashOn, IconFlashOff, IconFlip, IconScan } from '../../assets';
+import { IconCamera, IconFlashOn, IconFlashOff, IconFlip, IconCameraDisable } from '../../assets';
 
-const Scan = ({ navigation }) => {
+const Scan = ({ route, navigation }) => {
 
   const label = ["Alpukat", "Apel", "Buah Naga", "Jeruk", "Lemon", "Nanas", "Pir", "Pisang", "Semangka", "Tomat"];
   const ratio = "16:9";
   const cameraRef = useRef();
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [predictStatus, setPredictStatus] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
   const [flashSwitch, setFlashSwitch] = useState(Camera.Constants.FlashMode.off);
   const [flipSwitch, setFlipSwitch] = useState(Camera.Constants.Type.back);
   const [presentedFruit, setPresentedFruit] = useState('Not predicted yet.');
@@ -33,10 +34,12 @@ const Scan = ({ navigation }) => {
       base64: true,
     });
     processImagePrediction(imageData);
+    cameraRef.current.pausePreview();
   };
 
   // Predict function.
   const processImagePrediction = async (base64Image) => {
+    setPresentedFruit('Predicting...')
     const croppedData = await cropPicture(base64Image, 200);
     const model = await getModel();
     const tensor = await convertBase64ToTensor(croppedData.base64);
@@ -47,6 +50,7 @@ const Scan = ({ navigation }) => {
       Math.max.apply(null, prediction),
     );
     setPresentedFruit(label[highestPrediction]);
+    setModalVisible(true);
   };
 
   const flashFunction = () => {
@@ -69,6 +73,14 @@ const Scan = ({ navigation }) => {
     }
   }
 
+  const setCameraIcon = () => {
+    if (presentedFruit === 'Predicting...') {
+      return <TouchableOpacity disabled={true} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><IconCameraDisable height={45} width={45} /></TouchableOpacity>
+    } else {
+      return <TouchableOpacity onPress={() => handleImageCapture()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><IconCamera height={45} width={45} /></TouchableOpacity>
+    }
+  }
+
   const flipFunction = () => {
     setFlipSwitch(
       flipSwitch === Camera.Constants.Type.back
@@ -79,38 +91,72 @@ const Scan = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.wrapper.mainWrapper}>
-      <View style={{ flexDirection: 'row' }}>
-        <BackButton onPress={() => navigation.goBack()} />
-        <View style={{ justifyContent: 'center', flex: 1 }}>
-          <Text style={{ textAlign: 'center', fontSize: 20, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60 }}>SCAN</Text>
+      {modalVisible ? (
+        <View style={{ flex: 1 }}>
+          <Modal visible={modalVisible} transparent={true} animationType="slide">
+            <View style={{ flex: 1, width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+              <View style={{ alignItems: 'center', justifyContent: 'center', width: 300, height: 300, borderRadius: 24, backgroundColor: '#EDF6E5' }}>
+                <Text>Hasil prediksi buah adalah : {presentedFruit}</Text>
+                {presentedFruit === '' && <ActivityIndicator size="large" />}
+                <View style={{ flexDirection: 'row' }}>
+                  <TouchableOpacity
+                    style={{ width: 100, height: 50, marginTop: 60, borderRadius: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: 'red' }}
+                    onPress={() => {
+                      setPresentedFruit('Not predicted yet.');
+                      setModalVisible(false);
+                    }}>
+                    <Text>Tutup</Text>
+                  </TouchableOpacity>
+                  <Gap width={10} />
+                  <TouchableOpacity
+                    style={{ width: 100, height: 50, marginTop: 60, borderRadius: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: 'red' }}
+                    onPress={() => {
+                      setPresentedFruit('Not predicted yet.');
+                      setModalVisible(false);
+                    }}>
+                    <Text style={{ color: 'white' }}>Close</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </Modal>
         </View>
-      </View>
-      <View style={{ flex: 1 }}>
-        <Camera
-          style={{ height: '100%', width: '100%' }}
-          ref={cameraRef}
-          type={flipSwitch}
-          autoFocus={true}
-          ratio={ratio}
-          whiteBalance={Camera.Constants.WhiteBalance.auto}
-          flashMode={flashSwitch}
-        >
-        </Camera>
-      </View>
-      <View style={{ alignItems: 'center' }}>
-        <Text>{presentedFruit}</Text>
-      </View>
-      <View style={{ height: 75, flexDirection: 'row' }}>
-        <TouchableOpacity onPress={() => flashFunction()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          {setFlashIcon()}
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleImageCapture()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <IconCamera height={45} width={45} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => flipFunction()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <IconFlip height={45} width={45} />
-        </TouchableOpacity>
-      </View>
+      ) : (
+        <View style={{ flex: 1 }}>
+          <View style={{ flexDirection: 'row' }}>
+            <BackButton onPress={() => navigation.goBack()} />
+            <View style={{ justifyContent: 'center', flex: 1 }}>
+              <Text style={{ textAlign: 'center', fontSize: 20, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60 }}>SCAN</Text>
+            </View>
+          </View>
+          <View style={{ flex: 1 }}>
+            <Camera
+              style={{ height: '100%', width: '100%' }}
+              ref={cameraRef}
+              type={flipSwitch}
+              autoFocus={true}
+              ratio={ratio}
+              whiteBalance={Camera.Constants.WhiteBalance.auto}
+              flashMode={flashSwitch}
+            >
+            </Camera>
+          </View>
+          <View style={{ alignItems: 'center' }}>
+            <Text>{route.params.testParam}</Text>
+            <Text>{presentedFruit}</Text>
+          </View>
+          <View style={{ height: 75, flexDirection: 'row' }}>
+            <TouchableOpacity onPress={() => flashFunction()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              {setFlashIcon()}
+            </TouchableOpacity>
+            {setCameraIcon()}
+            <TouchableOpacity onPress={() => flipFunction()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+              <IconFlip height={45} width={45} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      )
+      }
     </SafeAreaView>
   )
 }

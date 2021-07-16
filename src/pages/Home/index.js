@@ -1,20 +1,20 @@
 import React from 'react'
 import { View, TouchableOpacity, Text, BackHandler } from 'react-native'
 import { Gap } from '../../components';
-import { IconExit, IconGuide, IconInformation, IconOnly, IconScan } from '../../assets';
+import { IconExit, IconGuide, IconInformation, IconOnly, IconScan, NewLogo } from '../../assets';
 
 
 const Home = ({ navigation }) => {
   return (
     <View style={styles.wrapper.mainWrapper}>
       <View style={styles.wrapper.topWrapper}>
-        <IconOnly width={400} height={200} />
+        <NewLogo width={200} height={200} />
         <Gap height={6} />
         <Text style={styles.text.textLogo}>Fruits Recognition</Text>
       </View>
       <View style={styles.wrapper.bottomWrapper}>
         <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={() => navigation.navigate('Scan')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Scan', { testParam: 'Please take a picture first.', })}>
             <IconScan width={110} height={110} />
             <Text style={styles.text.textMenu}>Scan</Text>
           </TouchableOpacity>

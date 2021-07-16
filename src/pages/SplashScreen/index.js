@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
-import { IconOnly } from '../../assets';
+import { IconOnly, NewLogo } from '../../assets';
 import { Gap } from '../../components';
 
 const SplashScreen = ({ navigation }) => {
@@ -11,7 +11,7 @@ const SplashScreen = ({ navigation }) => {
   });
   return (
     <View style={styles.container}>
-      <IconOnly width={450} height={300} />
+      <NewLogo width={450} height={300} />
       <Gap height={6} />
       <Text style={styles.textWrapper.textTop}>Fruits Recognition</Text>
       <Gap height={12} />
