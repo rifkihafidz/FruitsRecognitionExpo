@@ -14,6 +14,7 @@
     "@tensorflow/tfjs": "^3.7.0",
     "@tensorflow/tfjs-react-native": "^0.6.0",
     "expo": "~42.0.1",
+    "expo-av": "~9.2.3",
     "expo-camera": "~11.2.1",
     "expo-gl": "~10.4.1",
     "expo-gl-cpp": "~10.4.0",

@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="SplashScreen">
       <Stack.Screen name="About" component={About} options={{ headerShown: false }} />
       <Stack.Screen name="Guide" component={Guide} options={{ headerShown: false }} />
       <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />

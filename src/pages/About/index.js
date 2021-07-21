@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import { Gap } from '../../components';
-import { IconOnly } from '../../assets';
+import { NewLogo } from '../../assets';
 import { BackButton } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -17,7 +17,7 @@ const About = ({ navigation }) => {
       </View>
       <Gap height={6} />
       <View style={styles.wrapper.logoWrapper}>
-        <IconOnly width={300} height={150} />
+        <NewLogo width={300} height={150} />
       </View>
       <Gap height={6} />
       <Text style={styles.text.textLogo}>About Fruits Recognition</Text>
@@ -28,16 +28,16 @@ const About = ({ navigation }) => {
       <Gap height={10} />
       <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
         <View style={styles.wrapper.buahWrapper} >
-          <Text style={styles.text.textBuah}>ALPUKAT</Text>
           <Text style={styles.text.textBuah}>APEL</Text>
           <Text style={styles.text.textBuah}>BUAH NAGA</Text>
           <Text style={styles.text.textBuah}>JERUK</Text>
           <Text style={styles.text.textBuah}>LEMON</Text>
+          <Text style={styles.text.textBuah}>NANAS</Text>
         </View>
         <View style={styles.wrapper.buahWrapper} >
-          <Text style={styles.text.textBuah}>NANAS</Text>
           <Text style={styles.text.textBuah}>PIR</Text>
           <Text style={styles.text.textBuah}>PISANG</Text>
+          <Text style={styles.text.textBuah}>SALAK</Text>
           <Text style={styles.text.textBuah}>SEMANGKA</Text>
           <Text style={styles.text.textBuah}>TOMAT</Text>
         </View>

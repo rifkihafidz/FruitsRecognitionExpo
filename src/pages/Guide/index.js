@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import { Gap } from '../../components';
-import { IconOnly } from '../../assets';
+import { NewLogo } from '../../assets';
 import { BackButton } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -17,7 +17,7 @@ const Guide = ({ navigation }) => {
       </View>
       <Gap height={6} />
       <View style={styles.wrapper.logoWrapper}>
-        <IconOnly width={300} height={150} />
+        <NewLogo width={300} height={150} />
       </View>
       <Gap height={6} />
       <Text style={styles.text.textLogo}>Cara Menggunakan Aplikasi</Text>
@@ -25,9 +25,9 @@ const Guide = ({ navigation }) => {
       <View style={{ flexDirection: 'row' }}>
         <View style={styles.wrapper.buahWrapper}>
           <Text style={styles.text.textBuah}>Pilih 'Scan' pada menu utama</Text>
-          <Text style={styles.text.textBuah}>Arahkan kamera ponsel Anda ke buah yang di klasifikasi</Text>
-          <Text style={styles.text.textBuah}>Presentase hasil prediksi buah akan muncul di bagian bawah layar ponsel Anda</Text>
-          <Text style={styles.text.textBuah}>Jika dalam 3 detik presentase hasil prediksi tidak berubah, maka aplikasi akan otomatis melakukan screenshot layar ponsel Anda dan mengklasifikasikan gambar hasil screenshot tersebut</Text>
+          <Text style={styles.text.textBuah}>Arahkan kamera ponsel Anda ke buah yang ingin di klasifikasi</Text>
+          <Text style={styles.text.textBuah}>Ambil gambar buah dengan cara menekan ikon kamera</Text>
+          <Text style={styles.text.textBuah}>Aplikasi akan mengklasifikasikan gambar buah yang telah di ambil</Text>
           <Text style={styles.text.textBuah}>Hasil klasifikasi dan manfaat buah akan ditampilkan di layar ponsel Anda</Text>
         </View>
       </View>

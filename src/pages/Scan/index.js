@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, TouchableOpacity, Modal, ActivityIndicator, Image, View, Text } from 'react-native';
+import { TouchableOpacity, Modal, Image, View, Text } from 'react-native';
 import { Camera } from 'expo-camera';
 import { convertBase64ToTensor, getModel, startPrediction } from '../../helpers/tensor-helper';
 import { cropPicture } from '../../helpers/image-helper';
-import { BackButton, Gap } from '../../components';
+import { BackButton } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { IconCamera, IconFlashOn, IconFlashOff, IconFlip, IconCameraDisable } from '../../assets';
 import { benefits } from '../../helpers/fruitbenefits';
 
-const Scan = ({ route, navigation }) => {
+const Scan = ({ navigation }) => {
 
   const label = ['Apel', 'Buah Naga', 'Jeruk', 'Lemon', 'Nanas', 'Pir', 'Pisang', 'Salak', 'Semangka', 'Tomat'];
   const ratio = '16:9';
@@ -23,6 +23,10 @@ const Scan = ({ route, navigation }) => {
   useEffect(() => {
     permissionFunction();
   })
+
+  const stopSound = async () => {
+    sound.stopAsync();
+  }
 
   const permissionFunction = async () => {
     let { status } = await Camera.requestCameraPermissionsAsync();
@@ -96,33 +100,19 @@ const Scan = ({ route, navigation }) => {
       {modalVisible ? (
         <View style={{ flex: 1 }}>
           <Modal visible={modalVisible} transparent={true} animationType="slide">
-            <View style={{ flex: 1, width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ flex: 1, width: '100%', height: '100%', justifyContent: 'center' }}>
               <View style={{ alignItems: 'center', width: '100%', height: '100%', borderRadius: 24, backgroundColor: '#D5ECC2' }}>
-                <Text style={styles.text.result}>Hasil prediksi buah adalah : {presentedFruit}</Text>
-                <View style={{ height: 250, width: 125, marginVertical: 20, alignItems: 'center', backgroundColor: 'yellow' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                  <BackButton onPress={() => setModalVisible(false)} />
+                  <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center', marginRight: 57, paddingBottom: 5 }}>
+                    <Text style={styles.text.result}>Hasil : {presentedFruit}</Text>
+                  </View>
+                </View>
+                <View style={{ height: 250, width: 125, marginVertical: 10, alignItems: 'center', backgroundColor: 'yellow' }}>
                   <Image source={imageCaptured} style={{ height: '100%', width: '100%' }} />
                 </View>
-                <View style={{ flex: 1 }}>
+                <View style={{ padding: 10, marginBottom: 10 }}>
                   {benefits(presentedFruit)}
-                </View>
-                <View style={{ flexDirection: 'row' }}>
-                  <TouchableOpacity
-                    style={{ width: 100, height: 50, marginTop: 60, borderRadius: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: 'red' }}
-                    onPress={() => {
-                      setPresentedFruit('Not predicted yet.');
-                      setModalVisible(false);
-                    }}>
-                    <Text>Tutup</Text>
-                  </TouchableOpacity>
-                  <Gap width={10} />
-                  <TouchableOpacity
-                    style={{ width: 100, height: 50, marginTop: 60, borderRadius: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: 'red' }}
-                    onPress={() => {
-                      setPresentedFruit('Not predicted yet.');
-                      setModalVisible(false);
-                    }}>
-                    <Text style={{ color: 'white' }}>Close</Text>
-                  </TouchableOpacity>
                 </View>
               </View>
             </View>
@@ -147,10 +137,6 @@ const Scan = ({ route, navigation }) => {
               flashMode={flashSwitch}
             >
             </Camera>
-          </View>
-          <View style={{ alignItems: 'center' }}>
-            <Text>{route.params.testParam}</Text>
-            <Text>{presentedFruit}</Text>
           </View>
           <View style={{ height: 75, flexDirection: 'row' }}>
             <TouchableOpacity onPress={() => flashFunction()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

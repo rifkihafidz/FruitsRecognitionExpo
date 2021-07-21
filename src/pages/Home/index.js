@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity, Text, BackHandler } from 'react-native'
 import { Gap } from '../../components';
-import { IconExit, IconGuide, IconInformation, IconOnly, IconScan, NewLogo } from '../../assets';
+import { IconExit, IconGuide, IconInformation, IconScan, NewLogo } from '../../assets';
 
 
 const Home = ({ navigation }) => {
@@ -14,7 +14,7 @@ const Home = ({ navigation }) => {
       </View>
       <View style={styles.wrapper.bottomWrapper}>
         <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity onPress={() => navigation.navigate('Scan', { testParam: 'Please take a picture first.', })}>
+          <TouchableOpacity onPress={() => navigation.navigate('Scan')}>
             <IconScan width={110} height={110} />
             <Text style={styles.text.textMenu}>Scan</Text>
           </TouchableOpacity>
