@@ -3,10 +3,12 @@ import { Text, View } from 'react-native'
 import { Gap } from '../../components';
 import { IconOnly } from '../../assets';
 import { BackButton } from '../../components';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 const About = ({ navigation }) => {
   return (
-    <View style={styles.wrapper.mainWrapper}>
+    <SafeAreaView style={styles.wrapper.mainWrapper}>
       <View style={{ flexDirection: 'row' }}>
         <BackButton onPress={() => navigation.goBack()} />
         <View style={{ justifyContent: 'center', flex: 1 }}>
@@ -43,7 +45,7 @@ const About = ({ navigation }) => {
       <View style={styles.wrapper.copyrightWrapper}>
         <Text style={styles.text.textCopyright}>© 2021 Muhammad Rifki Hafidz - All Rights Reserved</Text>
       </View>
-    </View >
+    </SafeAreaView >
   )
 }
 

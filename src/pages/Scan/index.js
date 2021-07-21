@@ -1,22 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StyleSheet, TouchableOpacity, Modal, ActivityIndicator, Dimensions, View, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity, Modal, ActivityIndicator, Image, View, Text } from 'react-native';
 import { Camera } from 'expo-camera';
 import { convertBase64ToTensor, getModel, startPrediction } from '../../helpers/tensor-helper';
 import { cropPicture } from '../../helpers/image-helper';
 import { BackButton, Gap } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { IconCamera, IconFlashOn, IconFlashOff, IconFlip, IconCameraDisable } from '../../assets';
+import { benefits } from '../../helpers/fruitbenefits';
 
 const Scan = ({ route, navigation }) => {
 
-  const label = ["Alpukat", "Apel", "Buah Naga", "Jeruk", "Lemon", "Nanas", "Pir", "Pisang", "Semangka", "Tomat"];
-  const ratio = "16:9";
+  const label = ['Apel', 'Buah Naga', 'Jeruk', 'Lemon', 'Nanas', 'Pir', 'Pisang', 'Salak', 'Semangka', 'Tomat'];
+  const ratio = '16:9';
   const cameraRef = useRef();
-  const [predictStatus, setPredictStatus] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [imageCaptured, setImageCaptured] = useState(null);
   const [flashSwitch, setFlashSwitch] = useState(Camera.Constants.FlashMode.off);
   const [flipSwitch, setFlipSwitch] = useState(Camera.Constants.Type.back);
-  const [presentedFruit, setPresentedFruit] = useState('Not predicted yet.');
+  const [presentedFruit, setPresentedFruit] = useState('Belum ada hasil.');
   const [cameraPermission, setCameraPermission] = useState(null);
 
   useEffect(() => {
@@ -33,8 +34,9 @@ const Scan = ({ route, navigation }) => {
     const imageData = await cameraRef.current.takePictureAsync({
       base64: true,
     });
-    processImagePrediction(imageData);
     cameraRef.current.pausePreview();
+    setImageCaptured(imageData);
+    processImagePrediction(imageData);
   };
 
   // Predict function.
@@ -95,9 +97,14 @@ const Scan = ({ route, navigation }) => {
         <View style={{ flex: 1 }}>
           <Modal visible={modalVisible} transparent={true} animationType="slide">
             <View style={{ flex: 1, width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
-              <View style={{ alignItems: 'center', justifyContent: 'center', width: 300, height: 300, borderRadius: 24, backgroundColor: '#EDF6E5' }}>
-                <Text>Hasil prediksi buah adalah : {presentedFruit}</Text>
-                {presentedFruit === '' && <ActivityIndicator size="large" />}
+              <View style={{ alignItems: 'center', width: '100%', height: '100%', borderRadius: 24, backgroundColor: '#D5ECC2' }}>
+                <Text style={styles.text.result}>Hasil prediksi buah adalah : {presentedFruit}</Text>
+                <View style={{ height: 250, width: 125, marginVertical: 20, alignItems: 'center', backgroundColor: 'yellow' }}>
+                  <Image source={imageCaptured} style={{ height: '100%', width: '100%' }} />
+                </View>
+                <View style={{ flex: 1 }}>
+                  {benefits(presentedFruit)}
+                </View>
                 <View style={{ flexDirection: 'row' }}>
                   <TouchableOpacity
                     style={{ width: 100, height: 50, marginTop: 60, borderRadius: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: 'red' }}
@@ -126,7 +133,7 @@ const Scan = ({ route, navigation }) => {
           <View style={{ flexDirection: 'row' }}>
             <BackButton onPress={() => navigation.goBack()} />
             <View style={{ justifyContent: 'center', flex: 1 }}>
-              <Text style={{ textAlign: 'center', fontSize: 20, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60 }}>SCAN</Text>
+              <Text style={styles.text.title}>SCAN</Text>
             </View>
           </View>
           <View style={{ flex: 1 }}>
@@ -181,4 +188,12 @@ const styles = ({
       backgroundColor: 'blue'
     }
   },
+  text: {
+    title: {
+      textAlign: 'center', fontSize: 20, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60
+    },
+    result: {
+      textAlign: 'center', fontSize: 20, color: 'black', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginTop: 5
+    }
+  }
 })
