@@ -15,6 +15,7 @@ const Scan = ({ navigation }) => {
   const cameraRef = useRef();
   const [modalVisible, setModalVisible] = useState(false);
   const [imageCaptured, setImageCaptured] = useState(null);
+  const [appStatus, setAppStatus] = useState('Ready.');
   const [flashSwitch, setFlashSwitch] = useState(Camera.Constants.FlashMode.off);
   const [flipSwitch, setFlipSwitch] = useState(Camera.Constants.Type.back);
   const [presentedFruit, setPresentedFruit] = useState('Belum ada hasil.');
@@ -23,10 +24,6 @@ const Scan = ({ navigation }) => {
   useEffect(() => {
     permissionFunction();
   })
-
-  const stopSound = async () => {
-    sound.stopAsync();
-  }
 
   const permissionFunction = async () => {
     let { status } = await Camera.requestCameraPermissionsAsync();
@@ -45,7 +42,7 @@ const Scan = ({ navigation }) => {
 
   // Predict function.
   const processImagePrediction = async (base64Image) => {
-    setPresentedFruit('Predicting...')
+    setAppStatus('Predicting...')
     const croppedData = await cropPicture(base64Image, 200);
     const model = await getModel();
     const tensor = await convertBase64ToTensor(croppedData.base64);
@@ -101,9 +98,9 @@ const Scan = ({ navigation }) => {
         <View style={{ flex: 1 }}>
           <Modal visible={modalVisible} transparent={true} animationType="slide">
             <View style={{ flex: 1, width: '100%', height: '100%', justifyContent: 'center' }}>
-              <View style={{ alignItems: 'center', width: '100%', height: '100%', borderRadius: 24, backgroundColor: '#D5ECC2' }}>
+              <View style={{ alignItems: 'center', width: '100%', height: '100%', borderRadius: 24, backgroundColor: '#A6E3E9' }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                  <BackButton onPress={() => setModalVisible(false)} />
+                  <BackButton onPress={() => { setModalVisible(false); setAppStatus('Ready.') }} />
                   <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center', marginRight: 57, paddingBottom: 5 }}>
                     <Text style={styles.text.result}>Hasil : {presentedFruit}</Text>
                   </View>
@@ -138,6 +135,9 @@ const Scan = ({ navigation }) => {
             >
             </Camera>
           </View>
+          <View style={{ alignItems: 'center' }}>
+            <Text>App status: {appStatus}</Text>
+          </View>
           <View style={{ height: 75, flexDirection: 'row' }}>
             <TouchableOpacity onPress={() => flashFunction()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
               {setFlashIcon()}
@@ -159,7 +159,7 @@ export default Scan
 const styles = ({
   wrapper: {
     mainWrapper: {
-      backgroundColor: '#98DDCA',
+      backgroundColor: '#A6E3E9',
       flex: 1,
     },
     topWrapper: {
@@ -176,7 +176,7 @@ const styles = ({
   },
   text: {
     title: {
-      textAlign: 'center', fontSize: 20, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60
+      textAlign: 'center', fontSize: 20, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60
     },
     result: {
       textAlign: 'center', fontSize: 20, color: 'black', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginTop: 5

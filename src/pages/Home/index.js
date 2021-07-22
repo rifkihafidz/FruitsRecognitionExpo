@@ -46,7 +46,7 @@ export default Home
 const styles = {
   wrapper: {
     mainWrapper: {
-      backgroundColor: '#98DDCA',
+      backgroundColor: '#A6E3E9',
       flexDirection: 'column',
       flex: 1
     },
@@ -64,10 +64,10 @@ const styles = {
   },
   text: {
     textLogo: {
-      fontSize: 40, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
+      fontSize: 40, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
     },
     textMenu: {
-      fontSize: 25, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
+      fontSize: 25, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
     }
   }
 }

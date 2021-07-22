@@ -40,7 +40,7 @@ export const benefits = (presentedFruit) => {
   } else if (presentedFruit === 'Buah Naga') {
     sound.loadAsync(BuahNaga);
     return <View style={{ alignItems: 'center' }}>
-      <Text style={styles.textBenefit}>Manfaat Buah {presentedFruit}:</Text>
+      <Text style={styles.textBenefit}>Manfaat {presentedFruit}:</Text>
       <Text style={styles.textBenefit}>1. Mengurangi risiko kanker</Text>
       <Text style={styles.textBenefit}>2. Meningkatkan kesehatan jantung</Text>
       <Text style={styles.textBenefit}>3. Mengontrol kadar gula darah</Text>

@@ -12,7 +12,7 @@ const About = ({ navigation }) => {
       <View style={{ flexDirection: 'row' }}>
         <BackButton onPress={() => navigation.goBack()} />
         <View style={{ justifyContent: 'center', flex: 1 }}>
-          <Text style={{ textAlign: 'center', fontSize: 20, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60 }}>ABOUT</Text>
+          <Text style={{ textAlign: 'center', fontSize: 20, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60 }}>ABOUT</Text>
         </View>
       </View>
       <Gap height={6} />
@@ -24,7 +24,7 @@ const About = ({ navigation }) => {
       <Gap height={10} />
       <Text style={styles.text.textDescription}>Fruits Recognition merupakan aplikasi yang berfungsi untuk mengklasifikasikan buah-buahan menggunakan kamera smartphone secara real-time, setelah buah berhasil diklasifikasi, aplikasi ini akan menampilkan manfaat buah tersebut dalam bentuk teks dan suara.</Text>
       <Gap height={10} />
-      <Text style={styles.text.textDescription}>Buah apa saja yang dapat diklasifikasikan?</Text>
+      <Text style={styles.text.textDescription}>Buah yang dapat diklasifikasikan:</Text>
       <Gap height={10} />
       <View style={{ flexDirection: 'row', paddingHorizontal: 20 }}>
         <View style={styles.wrapper.buahWrapper} >
@@ -63,22 +63,22 @@ const styles = ({
       alignItems: 'center'
     },
     mainWrapper: {
-      backgroundColor: '#98DDCA',
+      backgroundColor: '#A6E3E9',
       flex: 1,
     },
   },
   text: {
     textBuah: {
-      color: '#FFFFFF', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, fontWeight: 'bold'
+      color: '#222831', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, fontWeight: 'bold'
     },
     textCopyright: {
-      fontSize: 14, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',
+      fontSize: 14, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',
     },
     textDescription: {
-      fontSize: 15, color: '#FFFFFF', textAlign: 'center', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10,
+      fontSize: 15, color: '#222831', textAlign: 'center', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10,
     },
     textLogo: {
-      fontSize: 32, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',
+      fontSize: 32, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',
     },
   }
 })
