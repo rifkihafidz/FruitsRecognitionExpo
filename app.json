@@ -3,6 +3,7 @@
     "name": "FruitsRecognition",
     "slug": "FruitsRecognition",
     "version": "1.0.0",
+    "icon": "./src/assets/Images/newlogo.png",
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -25,7 +26,9 @@
     "android": {
       "permissions": [
         "CAMERA"
-      ]
+      ],
+      "package": "com.rifkihafidz.fruitsrecognition",
+      "versionCode": 1
     }
   },
   "name": "FruitsRecognition"

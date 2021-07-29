@@ -1,76 +1,330 @@
-import React, { useState } from 'react'
-import { Modal, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import { Text, TouchableOpacity, View, Image } from 'react-native'
 import { Gap } from '../../components';
-import { IconDetail, IconHome } from '../../assets';
+import { IconHome, IconPlay, IconStop } from '../../assets';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Audio } from 'expo-av';
+import { Apel, BuahNaga, Jeruk, Lemon, Nanas, Pir, Pisang, Salak, Semangka, Tomat } from "../../helpers/sounds";
 
-const fruitSounds = {
-  Apel: require('../../sounds/1.Apel.mp3'),
-  BuahNaga: require('../../sounds/2.BuahNaga.mp3'),
-  Jeruk: require('../../sounds/3.Jeruk.mp3'),
-  Lemon: require('../../sounds/4.Lemon.mp3'),
-  Nanas: require('../../sounds/5.Nanas.mp3'),
-  Pir: require('../../sounds/6.Pir.mp3'),
-  Pisang: require('../../sounds/7.Pisang.mp3'),
-  Salak: require('../../sounds/8.Salak.mp3'),
-  Semangka: require('../../sounds/9.Semangka.mp3'),
-  Tomat: require('../../sounds/10.Tomat.mp3'),
-}
-
-const Result = ({ navigation }) => {
-  const [modalVisible, setModalVisible] = useState(false);
+const Result = ({ route, navigation }) => {
+  const { presentedFruit, imageCaptured } = route.params;
+  const sound = new Audio.Sound();
   const playSound = async () => {
-    const { sound } = await Audio.Sound.createAsync(require('../../sounds/1.Apel.mp3'));
-    await sound.playAsync();
+    sound.playAsync();
   }
-  return (
-    <SafeAreaView style={styles.wrapper.mainWrapper}>
-      <Modal animationType="slide" transparent={true} visible={modalVisible}>
-        <View style={{
-          margin: 20,
-          backgroundColor: "white",
-          borderRadius: 20,
-          padding: 35,
-          alignItems: "center",
-          elevation: 5
-        }}>
-          <TouchableOpacity onPress={() => setModalVisible(false)}>
-            <Text>Close Modal</Text>
+  const stopSound = async () => {
+    sound.stopAsync();
+  }
+  const benefits = (presentedFruit) => {
+    if (presentedFruit === 'Apel') {
+      sound.loadAsync(Apel);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat Buah {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Melawan penyakit asma</Text>
+        <Text style={styles.text.benefit}>2. Menjaga kesehatan tulang</Text>
+        <Text style={styles.text.benefit}>3. Menjaga kesehatan jantung</Text>
+        <Text style={styles.text.benefit}>4. Mencegah terjadinya kanker</Text>
+        <Text style={styles.text.benefit}>5. Kaya akan kandungan antioksidan</Text>
+        <Text style={styles.text.benefit}>6. Membantu menurunkan berat badan</Text>
+        <Text style={styles.text.benefit}>7. Menurunkan risiko penyakit diabetes</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
           </TouchableOpacity>
         </View>
-      </Modal>
-      <View style={{ justifyContent: 'center' }}>
-        <Text style={{ textAlign: 'center', fontSize: 20, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginTop: 6 }}>RESULT</Text>
       </View>
-      <Gap height={6} />
-      <TouchableOpacity onPress={() => playSound()} style={{ backgroundColor: 'yellow', flex: 2, marginHorizontal: 10 }}>
-      </TouchableOpacity>
-      <Gap height={6} />
-      <View style={{ backgroundColor: 'red', flex: 1, marginHorizontal: 10 }}>
+    } else if (presentedFruit === 'Buah Naga') {
+      sound.loadAsync(BuahNaga);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Menurunkan berat badan</Text>
+        <Text style={styles.text.benefit}>2. Meredakan batuk dan flu</Text>
+        <Text style={styles.text.benefit}>3. Mengurangi risiko kanker</Text>
+        <Text style={styles.text.benefit}>4. Mengontrol kadar gula darah</Text>
+        <Text style={styles.text.benefit}>5. Meningkatkan kesehatan jantung</Text>
+        <Text style={styles.text.benefit}>6. Meningkatkan sistem kekebalan tubuh</Text>
+        <Text style={styles.text.benefit}>7. Meningkatkan kesehatan sistem pencernaan</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    } else if (presentedFruit === 'Jeruk') {
+      sound.loadAsync(Jeruk);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat Buah {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Mencegah anemia</Text>
+        <Text style={styles.text.benefit}>2. Meningkatkan fungsi otak</Text>
+        <Text style={styles.text.benefit}>3. Mengurangi risiko diabetes</Text>
+        <Text style={styles.text.benefit}>4. Memelihara sistem pencernaan</Text>
+        <Text style={styles.text.benefit}>5. Membantu menjaga tekanan darah</Text>
+        <Text style={styles.text.benefit}>6. Memelihara kesehatan rambut dan kulit</Text>
+        <Text style={styles.text.benefit}>7. Menjaga kesehatan ibu hamil dan janinnya</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    } else if (presentedFruit === 'Lemon') {
+      sound.loadAsync(Lemon);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat Buah {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Menjaga sistem imun</Text>
+        <Text style={styles.text.benefit}>2. Menjaga kesehatan otot</Text>
+        <Text style={styles.text.benefit}>3. Mencegah kondisi anemia</Text>
+        <Text style={styles.text.benefit}>4. Menjaga kesehatan tulang</Text>
+        <Text style={styles.text.benefit}>5. Memelihara kesehatan jantung</Text>
+        <Text style={styles.text.benefit}>6. Membantu mengurangi berat badan</Text>
+        <Text style={styles.text.benefit}>7. Membantu melancarkan pencernaan</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    } else if (presentedFruit === 'Nanas') {
+      sound.loadAsync(Nanas);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat Buah {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Menjaga kesehatan kulit</Text>
+        <Text style={styles.text.benefit}>2. Menjaga kesehatan mata</Text>
+        <Text style={styles.text.benefit}>3. Mengurangi risiko kanker</Text>
+        <Text style={styles.text.benefit}>4. Menjaga kesehatan tulang</Text>
+        <Text style={styles.text.benefit}>5. Menjaga kehamilan tetap sehat</Text>
+        <Text style={styles.text.benefit}>6. Meningkatkan daya tahan tubuh</Text>
+        <Text style={styles.text.benefit}>7. Mengatasi gangguan pencernaan</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    } else if (presentedFruit === 'Pir') {
+      sound.loadAsync(Pir);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat Buah {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Mencegah sembelit</Text>
+        <Text style={styles.text.benefit}>2. Berpotensi melawan kanker</Text>
+        <Text style={styles.text.benefit}>3. Membantu mengurangi berat badan</Text>
+        <Text style={styles.text.benefit}>4. Membantu menjaga kesehatan tulang</Text>
+        <Text style={styles.text.benefit}>5. Membantu menjaga kesehatan jantung</Text>
+        <Text style={styles.text.benefit}>6. Berpotensi menurunkan risiko diabetes</Text>
+        <Text style={styles.text.benefit}>7. Berpotensi menurunkan risiko penyakit kronis</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    } else if (presentedFruit === 'Pisang') {
+      sound.loadAsync(Pisang);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat Buah {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Baik untuk kulit</Text>
+        <Text style={styles.text.benefit}>2. Baik bagi pencernaan</Text>
+        <Text style={styles.text.benefit}>3. Kaya akan magnesium</Text>
+        <Text style={styles.text.benefit}>4. Mengandung serat tinggi</Text>
+        <Text style={styles.text.benefit}>5. Menurunkan risiko stroke</Text>
+        <Text style={styles.text.benefit}>6. Menurunkan tekanan darah</Text>
+        <Text style={styles.text.benefit}>7. Meningkatkan stamina olahraga</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    } else if (presentedFruit === 'Salak') {
+      sound.loadAsync(Salak);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat Buah {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Melancarkan pencernaan</Text>
+        <Text style={styles.text.benefit}>2. Menjaga kesehatan kulit</Text>
+        <Text style={styles.text.benefit}>3. Menjaga kesehatan jantung</Text>
+        <Text style={styles.text.benefit}>4. Menjaga berat badan seimbang</Text>
+        <Text style={styles.text.benefit}>5. Meningkatkan kekebalan tubuh</Text>
+        <Text style={styles.text.benefit}>6. Memperbaiki jaringan tubuh yang rusak</Text>
+        <Text style={styles.text.benefit}>7. Meningkatkan kepadatan dan kekuatan tulang</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    } else if (presentedFruit === 'Semangka') {
+      sound.loadAsync(Semangka);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat Buah {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Mengatasi nyeri otot</Text>
+        <Text style={styles.text.benefit}>2. Menjaga kesehatan jantung</Text>
+        <Text style={styles.text.benefit}>3. Meningkatkan kesehatan kulit</Text>
+        <Text style={styles.text.benefit}>4. Meningkatkan kesehatan rambut</Text>
+        <Text style={styles.text.benefit}>5. Memenuhi kebutuhan cairan tubuh</Text>
+        <Text style={styles.text.benefit}>6. Mencegah pembentukan batu ginjal</Text>
+        <Text style={styles.text.benefit}>7. Membantu mengendalikan gula darah</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    } else if (presentedFruit === 'Tomat') {
+      sound.loadAsync(Tomat);
+      return <View>
+        <Text style={styles.text.benefitresult}>Manfaat Buah {presentedFruit}:</Text>
+        <Text style={styles.text.benefit}>1. Mencegah kanker</Text>
+        <Text style={styles.text.benefit}>2. Mengatasi diabetes</Text>
+        <Text style={styles.text.benefit}>3. Menjaga kesehatan kulit</Text>
+        <Text style={styles.text.benefit}>4. Menjaga kesehatan mata</Text>
+        <Text style={styles.text.benefit}>5. Melancarkan pencernaan</Text>
+        <Text style={styles.text.benefit}>6. Menjaga kesehatan jantung</Text>
+        <Text style={styles.text.benefit}>7. Meningkatkan kesehatan saat hamil</Text>
+        <Gap height={10} />
+        <View style={{ flexDirection: 'row', marginTop: 15, justifyContent: 'center', justifyContent: 'center' }}>
+          <TouchableOpacity onPress={() => playSound()}>
+            <IconPlay width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Mulai</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => stopSound()}>
+            <IconStop width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
+          </TouchableOpacity>
+          <Gap width={35} />
+          <TouchableOpacity onPress={() => { navigation.navigate('Home'); stopSound(); }}>
+            <IconHome width={75} height={75} />
+            <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    } else {
+      return <Text>Belum ada hasil.</Text>
+    }
+  }
 
-      </View>
-      <Gap height={6} />
-
-      <View style={{ flex: 1, flexDirection: 'row', marginHorizontal: 10 }}>
-        <TouchableOpacity onPress={() => setModalVisible(true)} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <IconDetail height={90} width={90} />
-          <Gap height={6} />
-          <Text style={styles.text.textMenu}>Details</Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity onPress={() => navigation.navigate('Scan')} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <IconLoop height={90} width={90} />
-          <Gap height={6} />
-          <Text style={styles.text.textMenu}>Scan Ulang</Text>
-        </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => navigation.navigate('Home')} style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <IconHome height={90} width={90} />
-          <Gap height={6} />
-          <Text style={styles.text.textMenu}>Home</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.wrapper.copyrightWrapper}>
-        <Text style={styles.text.textCopyright}>© 2021 Muhammad Rifki Hafidz - All Rights Reserved</Text>
+  return (
+    <SafeAreaView style={styles.wrapper.mainWrapper}>
+      <View style={{ alignItems: 'center', width: '100%', height: '100%', borderRadius: 24, backgroundColor: '#A6E3E9' }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+          <View style={{ justifyContent: 'center', flex: 1, alignItems: 'center', paddingTop: 10 }}>
+            <Text style={styles.text.result}>Hasil : {presentedFruit}</Text>
+          </View>
+        </View>
+        <View style={{ height: 250, width: 125, marginVertical: 10, alignItems: 'center', borderColor: 'black', borderRadius: 5, borderWidth: 1 }}>
+          <Image source={imageCaptured} style={{ height: '100%', width: '100%' }} />
+        </View>
+        <View style={{ paddingHorizontal: 15, alignItems: 'center' }}>
+          {benefits(presentedFruit)}
+        </View>
       </View>
     </SafeAreaView >
   )
@@ -80,26 +334,23 @@ export default Result
 
 const styles = ({
   wrapper: {
-    copyrightWrapper: {
-      paddingBottom: 10
-    },
-    buahWrapper: {
-      flex: 1, alignItems: 'center'
-    },
-    logoWrapper: {
-      alignItems: 'center'
-    },
     mainWrapper: {
-      backgroundColor: '#98DDCA',
+      backgroundColor: '#A6E3E9',
       flex: 1,
     },
   },
   text: {
-    textCopyright: {
-      fontSize: 14, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',
+    title: {
+      textAlign: 'center', fontSize: 20, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, marginRight: 60
     },
-    textMenu: {
-      fontSize: 16, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
+    result: {
+      textAlign: 'center', fontSize: 20, color: 'black', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, marginTop: 5
+    },
+    benefitresult: {
+      textAlign: 'center', fontSize: 20, color: 'black', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, marginTop: 5
+    },
+    benefit: {
+      textAlign: 'left', fontSize: 20, color: 'black', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, marginTop: 5
     }
   }
 })

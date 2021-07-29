@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
-import { IconOnly, NewLogo } from '../../assets';
+import { NewLogo } from '../../assets';
 import { Gap } from '../../components';
 
 const SplashScreen = ({ navigation }) => {
@@ -24,17 +24,17 @@ export default SplashScreen;
 
 const styles = {
   container: {
-    backgroundColor: '#98DDCA',
+    backgroundColor: '#A6E3E9',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   textWrapper: {
     textTop: {
-      fontSize: 40, color: '#FFFFFF', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
+      fontSize: 40, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
     },
     textBottom: {
-      fontSize: 18, color: '#FFFFFF', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10,
+      fontSize: 18, color: '#222831', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10,
     }
   }
 }

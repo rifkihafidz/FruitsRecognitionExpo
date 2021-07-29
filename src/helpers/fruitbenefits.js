@@ -1,7 +1,7 @@
 import React from "react"
 import { Text, TouchableOpacity, View } from "react-native"
 import { Audio } from 'expo-av';
-import { IconPlay, IconStop } from "../assets";
+import { IconPlay, IconStop, IconClose } from "../assets";
 import { Gap } from "../components";
 import { Apel, BuahNaga, Jeruk, Lemon, Nanas, Pir, Pisang, Salak, Semangka, Tomat } from "./sounds";
 
@@ -36,7 +36,7 @@ export const benefits = (presentedFruit) => {
           <Text style={{ fontSize: 15, color: 'black', fontWeight: 'bold', textAlign: 'center' }}>Stop</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </View >
   } else if (presentedFruit === 'Buah Naga') {
     sound.loadAsync(BuahNaga);
     return <View style={{ alignItems: 'center' }}>
