@@ -24,11 +24,11 @@ const Guide = ({ navigation }) => {
       <Gap height={10} />
       <View style={{ flexDirection: 'row' }}>
         <View style={styles.wrapper.buahWrapper}>
-          <Text style={styles.text.textBuah}>Pilih 'Scan' pada menu utama</Text>
-          <Text style={styles.text.textBuah}>Arahkan kamera ponsel Anda ke buah yang ingin di klasifikasi</Text>
-          <Text style={styles.text.textBuah}>Ambil gambar buah dengan cara menekan ikon kamera</Text>
-          <Text style={styles.text.textBuah}>Aplikasi akan mengklasifikasikan gambar buah yang telah di ambil</Text>
-          <Text style={styles.text.textBuah}>Hasil klasifikasi dan manfaat buah akan ditampilkan di layar ponsel Anda</Text>
+          <Text style={styles.text.textBuah}>1. Pilih 'Scan' pada menu utama</Text>
+          <Text style={styles.text.textBuah}>2. Arahkan kamera ponsel Anda ke buah yang ingin di klasifikasi</Text>
+          <Text style={styles.text.textBuah}>3. Ambil gambar buah dengan cara menekan ikon kamera</Text>
+          <Text style={styles.text.textBuah}>4. Aplikasi akan mengklasifikasikan gambar buah yang telah di ambil</Text>
+          <Text style={styles.text.textBuah}>5. Hasil klasifikasi dan manfaat buah akan ditampilkan di layar ponsel Anda</Text>
         </View>
       </View>
       <View style={styles.wrapper.copyrightWrapper}>
@@ -58,7 +58,7 @@ const styles = ({
   },
   text: {
     textBuah: {
-      color: '#222831', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, fontWeight: 'bold', textAlign: 'left', marginBottom: 8, fontSize: 16
+      color: '#222831', fontWeight: 'bold', textAlign: 'left', marginBottom: 8, fontSize: 16
     },
     textCopyright: {
       fontSize: 14, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',

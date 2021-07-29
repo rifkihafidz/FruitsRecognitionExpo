@@ -69,13 +69,13 @@ const styles = ({
   },
   text: {
     textBuah: {
-      color: '#222831', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, fontWeight: 'bold'
+      color: '#222831', fontWeight: 'bold'
     },
     textCopyright: {
       fontSize: 14, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',
     },
     textDescription: {
-      fontSize: 15, color: '#222831', textAlign: 'center', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10,
+      fontSize: 15, color: '#222831', textAlign: 'center'
     },
     textLogo: {
       fontSize: 32, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',

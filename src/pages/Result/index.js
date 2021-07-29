@@ -7,7 +7,7 @@ import { Audio } from 'expo-av';
 import { Apel, BuahNaga, Jeruk, Lemon, Nanas, Pir, Pisang, Salak, Semangka, Tomat } from "../../helpers/sounds";
 
 const Result = ({ route, navigation }) => {
-  const { presentedFruit, imageCaptured } = route.params;
+  const { imageCaptured, presentedFruit } = route.params;
   const sound = new Audio.Sound();
   const playSound = async () => {
     sound.playAsync();
@@ -334,10 +334,7 @@ export default Result
 
 const styles = ({
   wrapper: {
-    mainWrapper: {
-      backgroundColor: '#A6E3E9',
-      flex: 1,
-    },
+    mainWrapper: { backgroundColor: '#A6E3E9', flex: 1 }
   },
   text: {
     title: {
@@ -347,10 +344,10 @@ const styles = ({
       textAlign: 'center', fontSize: 20, color: 'black', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, marginTop: 5
     },
     benefitresult: {
-      textAlign: 'center', fontSize: 20, color: 'black', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, marginTop: 5
+      textAlign: 'center', fontSize: 20, color: 'black', fontWeight: 'bold', marginTop: 5
     },
     benefit: {
-      textAlign: 'left', fontSize: 20, color: 'black', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, marginTop: 5
+      textAlign: 'left', fontSize: 18, color: 'black', fontWeight: 'bold', marginTop: 5
     }
   }
 })

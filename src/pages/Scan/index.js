@@ -103,19 +103,11 @@ const Scan = ({ navigation }) => {
         </View>
       </View>
       <View style={{ flex: 1 }}>
-        <Camera
-          style={{ height: '100%', width: '100%' }}
-          ref={cameraRef}
-          type={flipSwitch}
-          autoFocus={true}
-          ratio={ratio}
-          whiteBalance={Camera.Constants.WhiteBalance.auto}
-          flashMode={flashSwitch}
-        >
+        <Camera style={{ height: '100%', width: '100%' }} ref={cameraRef} type={flipSwitch} autoFocus={true} ratio={ratio} whiteBalance={Camera.Constants.WhiteBalance.auto} flashMode={flashSwitch}>
         </Camera>
       </View>
       <View style={{ alignItems: 'center' }}>
-        <Text>App status: {appStatus}</Text>
+        <Text style={styles.text.result}>App status: {appStatus}</Text>
       </View>
       <View style={{ height: 75, flexDirection: 'row' }}>
         <TouchableOpacity onPress={() => flashFunction()} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -132,28 +124,17 @@ export default Scan
 
 const styles = ({
   wrapper: {
-    mainWrapper: {
-      backgroundColor: '#A6E3E9',
-      flex: 1,
-    },
-    topWrapper: {
-      flex: 2,
-      flexDirection: 'row',
-    },
-    middleWrapper: {
-      flex: 11,
-    },
-    bottomWrapper: {
-      flex: 4,
-      backgroundColor: 'blue'
-    }
+    mainWrapper: { backgroundColor: '#A6E3E9', flex: 1 },
+    topWrapper: { flex: 2, flexDirection: 'row' },
+    middleWrapper: { flex: 11, },
+    bottomWrapper: { flex: 4, backgroundColor: 'blue' }
   },
   text: {
     title: {
       textAlign: 'center', fontSize: 20, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60
     },
     result: {
-      textAlign: 'center', fontSize: 20, color: 'black', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginTop: 5
+      textAlign: 'center', fontSize: 14, color: '#222831', fontWeight: 'bold', textAlign: 'center', marginTop: 5
     }
   }
 })

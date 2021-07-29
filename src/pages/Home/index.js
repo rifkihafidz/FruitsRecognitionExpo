@@ -86,7 +86,7 @@ const styles = {
   },
   modal: {
     button: {
-      borderRadius: 20, elevation: 2, height: 35, width: 60, justifyContent: 'center', alignItems: 'center'
+      borderRadius: 20, elevation: 2, height: 35, width: 60, justifyContent: 'center', alignItems: 'center', elevation: 5
     },
     buttonYes: {
       backgroundColor: '#00c0f1ff'
