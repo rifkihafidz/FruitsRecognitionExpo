@@ -71,7 +71,7 @@ const styles = ({
       color: '#222831', fontWeight: 'bold'
     },
     textCopyright: {
-      fontSize: 14, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',
+      fontSize: 12, color: '#222831', fontWeight: 'bold', textAlign: 'center',
     },
     textDescription: {
       fontSize: 15, color: '#222831', textAlign: 'center'

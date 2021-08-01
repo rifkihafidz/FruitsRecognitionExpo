@@ -11,7 +11,7 @@ const Guide = ({ navigation }) => {
       <View style={{ flexDirection: 'row' }}>
         <BackButton onPress={() => navigation.goBack()} />
         <View style={{ justifyContent: 'center', flex: 1 }}>
-          <Text style={{ textAlign: 'center', fontSize: 20, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60 }}>GUIDE</Text>
+          <Text style={styles.text.title}>GUIDE</Text>
         </View>
       </View>
       <Gap height={6} />
@@ -56,11 +56,14 @@ const styles = ({
     },
   },
   text: {
+    title: {
+      textAlign: 'center', fontSize: 20, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center', marginRight: 60
+    },
     textBuah: {
       color: '#222831', fontWeight: 'bold', textAlign: 'left', marginBottom: 8, fontSize: 16
     },
     textCopyright: {
-      fontSize: 14, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center',
+      fontSize: 12, color: '#222831', fontWeight: 'bold', textAlign: 'center',
     },
     textDescription: {
       fontSize: 15, color: '#222831', textAlign: 'center', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10,

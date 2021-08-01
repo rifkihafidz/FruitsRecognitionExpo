@@ -34,7 +34,7 @@ const styles = {
       fontSize: 40, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
     },
     textBottom: {
-      fontSize: 18, color: '#222831', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10,
+      fontSize: 18, color: '#222831'
     }
   }
 }

@@ -6,21 +6,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
-
-  useEffect(() => {
-    const backAction = () => {
-      setModalVisible(true)
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
-    return () => backHandler.remove();
-  }, []);
-
   return (
     <SafeAreaView style={styles.wrapper.mainWrapper}>
       <Modal animationType='slide' transparent={true} visible={modalVisible}>
@@ -89,7 +74,7 @@ const styles = {
   },
   text: {
     textLogo: {
-      fontSize: 40, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
+      fontSize: 36, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
     },
     textMenu: {
       fontSize: 25, color: '#222831', fontWeight: 'bold', textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 10, textAlign: 'center'
