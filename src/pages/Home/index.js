@@ -1,18 +1,29 @@
-import React, { useState } from 'react'
-import { View, TouchableOpacity, Text, BackHandler, Modal } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, TouchableOpacity, Text, BackHandler, Modal, Alert } from 'react-native'
 import { Gap } from '../../components';
 import { IconExit, IconGuide, IconInformation, IconScan, NewLogo } from '../../assets';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    const backAction = () => {
+      setModalVisible(true)
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   return (
     <SafeAreaView style={styles.wrapper.mainWrapper}>
-      <Modal
-        animationType='slide'
-        transparent={true}
-        visible={modalVisible}
-      >
+      <Modal animationType='slide' transparent={true} visible={modalVisible}>
         <View style={styles.modal.wrapper}>
           <View style={styles.modal.view}>
             <Text style={styles.modal.text}>Keluar dari aplikasi?</Text>

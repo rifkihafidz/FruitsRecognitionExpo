@@ -5,7 +5,6 @@ import { NewLogo } from '../../assets';
 import { BackButton } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-
 const Guide = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.wrapper.mainWrapper}>
